@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="{{=it.assetcss}}"></script>
+    <script type="text/javascript" src="{{=it.requirejs}}"></script>
+    <script>
+      app = {};
+      var bs = {{=it.bs}};
+      console.log('bs', bs);
+      {{=it.requireconfig}}
+    </script>
+    <script type="text/javascript" src="{{=it.assetjs}}"></script>
+  </head>
+  <body>
+    <p> caption: {{=it.caption}} </p>
+  </body>
+</html>
+
+

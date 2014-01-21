@@ -1,0 +1,1 @@
+define(["backbone"],function(e){return e.Model.extend({initialize:function(e){console.log("initialize model")}})});
