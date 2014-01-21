@@ -11,6 +11,10 @@ css/bootstrap.css
 ----------------
 css/bootstrap.css
 
+css/home-inline.css
+----------------
+css/home-inline.css
+
 css/home.css
 ----------------
 css/bootstrap.css
@@ -18,12 +22,24 @@ css/bootstrap-responsive.css
 css/base.css
 css/home.css
 
+css/homeinline.css
+----------------
+css/homeinline.css
+
+css/login-inline.css
+----------------
+css/login-inline.css
+
 css/login.css
 ----------------
 css/bootstrap.css
 css/bootstrap-responsive.css
 css/base.css
 css/login.css
+
+css/logininline.css
+----------------
+css/logininline.css
 
 js/login.js
 ----------------

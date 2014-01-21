@@ -26,15 +26,6 @@ if (config.release) {
     }
   });
   
-  fs.readdir(__dirname + '/release/js/lib', function(err,files){
-    if (err)
-      return console.error('error reading assets', err);
-    for(var i = 0; i < files.length; i++){
-      if ( files[i].match(/^require-/))
-        assets.requirejs = '/js/lib/' + files[i]
-    }
-  });
-
   fs.readdir('./release/css', function(err,files){
     if (err)
       return console.error('error reading assets', err);
@@ -42,22 +33,19 @@ if (config.release) {
       if ( files[i].match(/^login-/))
         assets.logincss = '/css/' + files[i]
       else if ( files[i].match(/^home-/))
-        assets.homecss = '/css/' + files[i];
+        assets.homecss = '/css/' + files[i]
+      else if ( files[i] == 'logininline.css' )
+        assets.inlinestyle = fs.readFileSync( './release/css/' + files[i], { encoding: 'utf8'})
+      else if ( files[i] == 'homeinline.css' )
+        assets.inlinestyle = fs.readFileSync( './release/css/' + files[i], { encoding: 'utf8'});
     }
   });
   
-  fs.readFile('./release/js/config.js', { encoding: 'utf8' }, function(err,data){
-    assets.requirejsconfig = data;
-  });
 
 } else {
-  fs.readFile('./public/js/config.js', { encoding: 'utf8' }, function(err,data){
-    assets.requirejsconfig = data;
-  });
   
   assets.loginjs = '/js/login.js';
   assets.homejs = '/js/home.js';
-  assets.requirejs = '/js/lib/require.js';
   assets.logincss = '/css/login.css';
   assets.homecss = '/css/home.css';
 }
@@ -68,11 +56,10 @@ app.configure(function(){
 });
 
 app.get( '*',  function( req, res, next ){
-  console.log('get');
+  console.log('get', assets);
   res.end(assets.template({
-    requirejs: assets.requirejs,
-    requireconfig: assets.requirejsconfig,
-    caption: 'hey', 
+    caption: 'hey',
+    inlinestyle: assets.inlinestyle,
     assetjs: req.user ? assets.homejs : assets.loginjs,
     assetcss: req.user ? assets.homecss : assets.logincss,
     user: req.user ? req.user.toJSON() : null,
