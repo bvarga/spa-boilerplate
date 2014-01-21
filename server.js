@@ -12,7 +12,7 @@ fs.readFile('./views/main.dot', { encoding: 'utf8' }, function(err,data){
   assets.template = doT.template(data);
 });
 
-assets.requirejs = '/js/lib/require.js';
+
 
 if (config.release) {
   fs.readdir('./release/js', function(err,files){
@@ -23,6 +23,15 @@ if (config.release) {
         assets.loginjs = '/js/' + files[i]
       else if ( files[i].match(/^home-/))
         assets.homejs = '/js/' + files[i];
+    }
+  });
+  
+  fs.readdir(__dirname + '/release/js/lib', function(err,files){
+    if (err)
+      return console.error('error reading assets', err);
+    for(var i = 0; i < files.length; i++){
+      if ( files[i].match(/^require-/))
+        assets.requirejs = '/js/lib/' + files[i]
     }
   });
 
@@ -48,6 +57,7 @@ if (config.release) {
   
   assets.loginjs = '/js/login.js';
   assets.homejs = '/js/home.js';
+  assets.requirejs = '/js/lib/require.js';
   assets.logincss = '/css/login.css';
   assets.homecss = '/css/home.css';
 }
