@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link type="text/css" rel="stylesheet" href="{{=it.assetcss}}"></script>
-    <script type="text/javascript" src="{{=it.requirejs}}"></script>
+    <style>
+      p{
+        font-size: 30px;
+      }
+    </style>
     <script>
       app = {};
       var bs = {{=it.bs}};
-      console.log('bs', bs);
-      {{=it.requireconfig}}
+      (function() {
+        var link = document.createElement("link");
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        link.href = '{{=it.assetcss}}';
+        document.getElementsByTagName("head")[0].appendChild(link);
+      })();
+      (function(){
+        var po = document.createElement('script');
+        po.async = true;
+        po.src = '{{=it.assetjs}}';
+        po.type = 'text/javascript';
+        document.getElementsByTagName("head")[0].appendChild(po);
+      })();
     </script>
-    <script type="text/javascript" src="{{=it.assetjs}}"></script>
   </head>
   <body>
     <p> caption: {{=it.caption}} </p>

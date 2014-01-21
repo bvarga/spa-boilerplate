@@ -57,6 +57,10 @@ require({
       name: "home",
       include: ['HomeRouter']
     }
-  ]
+  ],
+  wrap: {
+    startFile: ['js/lib/require.js','js/config.js']
+  },
+  preserveLicenseComments: false,
+
 });
-var app = app || { ver: 'v0.1' };
