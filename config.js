@@ -4,7 +4,6 @@ var Config = function(){
   this.port = 3000;
 
   this.staticPath = __dirname + '/' + 'public';
-  //process.env.NODE_ENV = 'release';
   switch(process.env.NODE_ENV){
     case 'release':
       this.staticPath = __dirname + '/' + 'release';

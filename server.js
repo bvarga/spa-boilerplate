@@ -14,7 +14,7 @@ app.configure(function(){
 app.get( '*',  function( req, res, next ){
   // params for the inlined body template
   var inlinebodyparams = {
-    caption: 'hey'
+    caption: 'Hello world'
   };
   var bootstraps = { 
     user: req.user ? req.user.toJSON() : null,
