@@ -35,19 +35,22 @@ if (config.release) {
       else if ( files[i].match(/^home-/))
         assets.homecss = '/css/' + files[i]
       else if ( files[i] == 'logininline.css' )
-        assets.inlinestyle = fs.readFileSync( './release/css/' + files[i], { encoding: 'utf8'})
+        assets.logininlinestyle = fs.readFileSync( './release/css/' + files[i], { encoding: 'utf8'})
       else if ( files[i] == 'homeinline.css' )
-        assets.inlinestyle = fs.readFileSync( './release/css/' + files[i], { encoding: 'utf8'});
+        assets.homeinlinestyle = fs.readFileSync( './release/css/' + files[i], { encoding: 'utf8'});
     }
   });
   
 
 } else {
-  
+  assets.requirejs = '/js/lib/require.js';
+  assets.requirejsconfig = '/js/config.js';
   assets.loginjs = '/js/login.js';
   assets.homejs = '/js/home.js';
   assets.logincss = '/css/login.css';
   assets.homecss = '/css/home.css';
+  assets.logininlinestyle = '/css/logininline.css';
+  assets.homeinlinestyle = '/css/homeinline.css';
 }
 
 app.configure(function(){
@@ -58,11 +61,15 @@ app.configure(function(){
 app.get( '*',  function( req, res, next ){
   console.log('get', assets);
   res.end(assets.template({
-    caption: 'hey',
-    inlinestyle: assets.inlinestyle,
+    release: config.release,
+    requirejs: !config.release ? assets.requirejs : null,
+    requirejsconfig: !config.release ? assets.requirejsconfig : null,
     assetjs: req.user ? assets.homejs : assets.loginjs,
     assetcss: req.user ? assets.homecss : assets.logincss,
+    inlinestyle: req.user ? assets.homeinlinestyle : assets.logininlinestyle,
+    
     user: req.user ? req.user.toJSON() : null,
+    caption: 'hey',
     bs: JSON.stringify({ user: 'bob', license: true }) 
   }));
 });
