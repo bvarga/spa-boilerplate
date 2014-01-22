@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    {{? !it.release}}
-    <script type="text/javascript" src="{{=it.requirejs}}"></script>
-    <script type="text/javascript" src="{{=it.requirejsconfig}}"></script>
-    <link type="text/css" rel="stylesheet" href="{{=it.inlinestyle}}">
-    {{??}}
-    <style>
-      {{=it.inlinestyle}}
-    </style>
-    {{?}}
-    <script>
+doctype html
+html
+  head
+    | {{? it.requirejs}}
+    script(type="text/javascript",src="{{=it.requirejs}}")
+    script(type="text/javascript",src="{{=it.requirejsconfig}}")
+    link(type="text/css",rel="stylesheet",href="{{=it.inlinestyle}}")
+    | {{??}}
+    style {{=it.inlinestyle}}
+    | {{?}}
+    script.
       app = {};
       var bs = {{=it.bs}};
       (function() {
@@ -27,11 +25,6 @@
         po.type = 'text/javascript';
         document.getElementsByTagName("head")[0].appendChild(po);
       })();
-    </script>
-  </head>
-  <body>
-    <p> caption: {{=it.caption}} </p>
-  </body>
-</html>
+  body {{=it.body}}
 
 

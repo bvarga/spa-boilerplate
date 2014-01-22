@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head>{{? it.requirejs}}<script type="text/javascript" src="{{=it.requirejs}}"></script><script type="text/javascript" src="{{=it.requirejsconfig}}"></script><link type="text/css" rel="stylesheet" href="{{=it.inlinestyle}}">{{??}}<style>{{=it.inlinestyle}}</style>{{?}}<script>app = {};
+var bs = {{=it.bs}};
+(function() {
+  var link = document.createElement("link");
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  link.href = '{{=it.assetcss}}';
+  document.getElementsByTagName("head")[0].appendChild(link);
+})();
+(function(){
+  var po = document.createElement('script');
+  po.async = true;
+  po.src = '{{=it.assetjs}}';
+  po.type = 'text/javascript';
+  document.getElementsByTagName("head")[0].appendChild(po);
+})();</script></head><body>{{=it.body}}</body></html>
